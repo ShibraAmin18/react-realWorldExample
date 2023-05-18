@@ -2,21 +2,21 @@ pipeline {
      agent {
     kubernetes {
         label 'jenkinsrun'
-        defaultContainer 'builder'
+        defaultContainer 'dind'
         yaml """
 apiVersion: v1
 kind: Pod
 spec:
   containers:
-  - name: builder
-    image: squareops/jenkins-build-agent:latest
+  - name: dind
+    image: eeacms/jenkins-slave-dind:latest
     securityContext:
       privileged: true
     volumeMounts:
-      - name: builder-storage
+      - name: dind-storage
         mountPath: /var/lib/docker
   volumes:
-    - name: builder-storage
+    - name: dind-storage
       emptyDir: {}
 """
         }
