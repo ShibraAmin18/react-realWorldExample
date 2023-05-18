@@ -1,7 +1,7 @@
 pipeline {
      agent {
     kubernetes {
-        label 'jenkinsrun'
+        label 'dind'
         defaultContainer 'dind'
         yaml """
 apiVersion: v1
