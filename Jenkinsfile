@@ -18,7 +18,7 @@ pipeline {
         }
 
         stage('Docker Build and Push') {
-            when { anyOf { branch 'develop' || branch 'master' } }
+            when { anyOf { branch 'develop'; branch 'master' } }
             steps {
                 script {
                     docker.build("${ECR_REPO_NAME}:test}")
@@ -30,14 +30,14 @@ pipeline {
         }
 
         stage('Approval') {
-            when { anyOf { branch 'develop' || branch 'master' } }
+            when { anyOf { branch 'develop'; branch 'master' } }
             steps {
                 input 'Deploy to environment?'
             }
         }
 
         stage('Deploy') {
-            when { anyOf { branch 'develop' || branch 'master' }}
+            when { anyOf { branch 'develop'; branch 'master' }}
             steps {
                 script {
                     // Determine the environment based on the branch
