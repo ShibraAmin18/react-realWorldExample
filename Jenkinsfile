@@ -13,6 +13,7 @@ pipeline {
         stage('Unit Test') {
             when { changeRequest target: 'develop' }
             steps {
+                sh 'echo hello'
                 sh 'npm test'
             }
         }
