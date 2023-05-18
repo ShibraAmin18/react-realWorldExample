@@ -4,7 +4,7 @@ pipeline {
     environment {
         AWS_ACCOUNT_ID = 271251951598
         AWS_REGION = "us-east-2"
-        ECR_REPO_NAME = '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/web/stg'
+        ECR_REPO_NAME = '271251951598.dkr.ecr.us-east-2.amazonaws.com/web/stg'
         ECR_URL = 'https://271251951598.dkr.ecr.us-east-1.amazonaws.com'
         GIT_CREDENTIALS_ID = 'jenkins-demo-shibra'
     }
@@ -21,9 +21,9 @@ pipeline {
             when { anyOf { branch 'develop'; branch 'master' } }
             steps {
                 script {
-                    docker.build("${ECR_REPO_NAME}:test}")
+                    docker.build("${ECR_REPO_NAME}:test")
                     docker.withRegistry(ECR_URL, "ecr:us-east-2:${env.CREDENTIALS_ID}") {
-                        docker.push("${ECR_REPO_NAME}:test}")
+                        docker.push("${ECR_REPO_NAME}:test")
                     }
                 }
             }
