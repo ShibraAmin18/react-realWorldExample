@@ -1,26 +1,5 @@
 pipeline {
-     agent {
-    kubernetes {
-        label 'jenkinsrun1'
-        defaultContainer 'dind'
-        yaml """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: dind
-    image: eeacms/jenkins-slave-dind:latest
-    securityContext:
-      privileged: true
-    volumeMounts:
-      - name: dind-storage
-        mountPath: /var/lib/docker
-  volumes:
-    - name: dind-storage
-      emptyDir: {}
-"""
-        }
-      }
+     agent any
 
     environment {
         AWS_ACCOUNT_ID = 271251951598
